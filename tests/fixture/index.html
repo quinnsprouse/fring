@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>fring fixture</title>
+    <style>
+      body {
+        font: 16px/1.4 system-ui, sans-serif;
+        margin: 40px;
+        background: #fff;
+        color: #111;
+      }
+      /* Safari selects a field's text when a script focuses it. Keep that out of the screenshots. */
+      ::selection {
+        background: transparent;
+      }
+      .row {
+        display: flex;
+        gap: 28px;
+        align-items: center;
+        margin-bottom: 36px;
+      }
+      input,
+      button {
+        font: inherit;
+        padding: 8px 14px;
+        border: 1px solid #999;
+        background: #fff;
+        color: inherit;
+        caret-color: transparent;
+        width: 150px;
+        box-sizing: border-box;
+      }
+      .styled :focus-visible {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+      }
+      #round {
+        border-radius: 8px;
+      }
+      #pill {
+        border-radius: 999px;
+        width: 220px;
+        padding: 14px;
+      }
+      #blob {
+        border-radius: 40% 10px 30% 4px / 12px 50% 6px 20%;
+        width: 120px;
+        height: 70px;
+      }
+      #native2 {
+        border-radius: 10px;
+      }
+      #red:focus-visible {
+        outline: 3px solid #dc2626;
+        outline-offset: 4px;
+      }
+
+      .shadow {
+        border-radius: 6px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        transition:
+          box-shadow 0.15s,
+          color 0.15s;
+      }
+      .shadow:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 3px rgba(37, 99, 235, 0.5),
+          0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .bordered {
+        border: 0;
+        border-radius: 6px;
+        outline: 1px solid #9ca3af;
+        outline-offset: -1px;
+      }
+      .bordered:focus-visible {
+        outline: 2px solid #4f46e5;
+        outline-offset: -2px;
+      }
+
+      .all {
+        transition: all 0.3s;
+        border-radius: 4px;
+      }
+      .all:focus-visible {
+        outline: 2px solid #059669;
+        outline-offset: 3px;
+      }
+
+      .bare:focus-visible {
+        outline: none;
+      }
+
+      .clipper {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        width: 380px;
+        padding: 0;
+        display: flex;
+        gap: 28px;
+      }
+      .clipper input:focus-visible {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+      }
+
+      dialog {
+        padding: 32px;
+        border: 1px solid #999;
+      }
+      dialog :focus-visible {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+      }
+
+      .group {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      .group input {
+        border: 0;
+        outline: none;
+        width: 90px;
+      }
+      .group:focus-within {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+      }
+
+      .tall {
+        height: 1600px;
+      }
+      p {
+        width: 180px;
+      }
+      p a:focus-visible {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row styled">
+      <input id="a" value="a" />
+      <input id="round" value="round" />
+      <input id="pill" value="pill" />
+      <input id="blob" value="blob" />
+      <input id="red" value="red" />
+    </div>
+
+    <div class="row">
+      <input id="native1" value="native" />
+      <input id="native2" value="native" />
+    </div>
+
+    <div class="row">
+      <input id="shadow1" class="shadow" value="shadow" />
+      <input id="shadow2" class="shadow" value="shadow" />
+    </div>
+
+    <div class="row">
+      <input id="bordered1" class="bordered" value="bordered" />
+      <input id="bordered2" class="bordered" value="bordered" />
+    </div>
+
+    <div class="row">
+      <input id="all1" class="all" value="transition: all" />
+      <input id="all2" class="all" value="transition: all" />
+    </div>
+
+    <div class="row styled">
+      <input id="bare" class="bare" value="no ring" />
+      <input id="after-bare" value="after" />
+      <span data-fring="off"><input id="off" value="opted out" /></span>
+      <button id="button">button</button>
+      <input id="doomed" value="doomed" />
+    </div>
+
+    <div class="row">
+      <div class="clipper">
+        <input id="clip1" value="clipped" />
+        <input id="clip2" value="clipped" />
+      </div>
+    </div>
+
+    <div class="row">
+      <shadow-pair id="host"></shadow-pair>
+    </div>
+
+    <div class="row">
+      <div id="group" class="group" data-fring="within">
+        <span>$</span>
+        <input id="g1" value="from" />
+        <input id="g2" value="to" />
+      </div>
+    </div>
+
+    <div class="row">
+      <p>
+        Some words and then
+        <a id="wrapped" href="#">a link that is long enough to wrap onto a second line</a>
+        and more.
+      </p>
+      <input id="after-wrapped" value="after" class="all" />
+    </div>
+
+    <dialog id="dialog">
+      <div class="row">
+        <input id="d1" value="in dialog" />
+        <input id="d2" value="in dialog" />
+      </div>
+    </dialog>
+
+    <div class="tall"></div>
+    <div class="row styled">
+      <input id="far" value="far away" />
+    </div>
+
+    <script type="module">
+      import { fring } from '../../src/index.ts'
+
+      customElements.define(
+        'shadow-pair',
+        class extends HTMLElement {
+          constructor() {
+            super()
+            this.attachShadow({ mode: 'open' }).innerHTML = `
+              <style>
+                input { font: inherit; padding: 8px 14px; border: 1px solid #999; width: 150px; margin-right: 28px; caret-color: transparent; }
+                input:focus-visible { outline: 2px solid #7c3aed; outline-offset: 2px; }
+              </style>
+              <input id="s1" value="shadow dom" /><input id="s2" value="shadow dom" />`
+          }
+        },
+      )
+
+      const options = JSON.parse(new URLSearchParams(location.search).get('o') ?? '{}')
+      window.fring = fring
+      window.stop = fring(options)
+    </script>
+  </body>
+</html>

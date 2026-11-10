@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>fring perf fixture</title>
+    <style>
+      body { font: 14px system-ui; margin: 24px; }
+      .grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 12px; }
+      button { font: inherit; padding: 6px 10px; border: 1px solid #999; border-radius: 8px; background: #fff; transition: background-color .15s; }
+      button:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+      .filler span { display: inline-block; padding: 1px; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      import { fring } from '../../src/index.ts'
+      // 200 buttons, each 12 levels deep, plus about 10,000 filler nodes.
+      const app = document.getElementById('app')
+      const grid = document.createElement('div')
+      grid.className = 'grid'
+      for (let i = 0; i < 200; i++) {
+        let node = grid
+        for (let depth = 0; depth < 12; depth++) node = node.appendChild(document.createElement('div'))
+        const button = document.createElement('button')
+        button.textContent = `Button ${i}`
+        node.append(button)
+      }
+      app.append(grid)
+      const filler = document.createElement('div')
+      filler.className = 'filler'
+      for (let i = 0; i < 2000; i++) {
+        const p = document.createElement('p')
+        for (let j = 0; j < 4; j++) p.appendChild(document.createElement('span')).textContent = 'word '
+        filler.append(p)
+      }
+      app.append(filler)
+      window.fring = fring
+      window.ready = true
+    </script>
+  </body>
+</html>

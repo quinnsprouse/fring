@@ -1,0 +1,104 @@
+{
+  "name": "fring",
+  "version": "0.1.0",
+  "description": "Your focus ring, in motion. The browser's own focus outline glides between elements instead of blinking.",
+  "license": "MIT",
+  "author": "Quinn Sprouse",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quinnsprouse/fring.git"
+  },
+  "homepage": "https://github.com/quinnsprouse/fring#readme",
+  "bugs": "https://github.com/quinnsprouse/fring/issues",
+  "type": "module",
+  "sideEffects": [
+    "./dist/auto.js",
+    "./dist/auto.cjs",
+    "./dist/fring.global.js"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/fring.global.js",
+  "jsdelivr": "./dist/fring.global.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./react": {
+      "import": {
+        "types": "./dist/react.d.ts",
+        "default": "./dist/react.js"
+      },
+      "require": {
+        "types": "./dist/react.d.cts",
+        "default": "./dist/react.cjs"
+      }
+    },
+    "./auto": {
+      "import": {
+        "types": "./dist/auto.d.ts",
+        "default": "./dist/auto.js"
+      },
+      "require": {
+        "types": "./dist/auto.d.cts",
+        "default": "./dist/auto.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsup",
+    "dev": "vite --config site/vite.config.ts",
+    "site:build": "vite build --config site/vite.config.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test",
+    "size": "node scripts/size.mjs",
+    "perf": "node scripts/perf.mjs",
+    "bench": "node scripts/bench.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.0.0",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "pngjs": "^7.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "torph": "^0.1.3",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.0.0"
+  },
+  "keywords": [
+    "focus",
+    "focus-ring",
+    "focus-visible",
+    "accessibility",
+    "a11y",
+    "animation",
+    "keyboard",
+    "outline"
+  ]
+}
